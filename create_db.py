@@ -200,9 +200,9 @@ def generate_data_store():
 # === Main Execution ===
 def main():
     logging.info("Starting database creation workflow...")
-    save_to_db = generate_data_store()
+    pipeline = generate_data_store()
     
-    if not save_to_db:
+    if not pipeline:
         logging.warning("Workflow ended with errors.")
     else:
         logging.info("Workflow completed successfully.")

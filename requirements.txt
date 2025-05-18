@@ -8,9 +8,6 @@ unstructured==0.14.4 # Document loading
 onnxruntime
 chromadb # Vector storage
 tiktoken==0.7.0  # For embeddings 
-
-# install markdown depenendies with: `pip install "unstructured[md]"` after install the requirements file. Leave this line commented out. 
-
 pandas
 matplotlib
 seaborn
@@ -18,3 +15,4 @@ sentence-transformers
 pyyaml
 psutil
 
+# install markdown depenendies with: `pip install "unstructured[md]"` after install the requirements file. Leave this line commented out. 
