@@ -11,8 +11,12 @@ tiktoken==0.7.0  # For embeddings
 pandas
 matplotlib
 seaborn
+torch
+transformers
 sentence-transformers
 pyyaml
 psutil
+hf_xet
 
-# install markdown depenendies with: `pip install "unstructured[md]"` after install the requirements file. Leave this line commented out. 
+# `pip install -U langchain-chroma`
+# `pip install "unstructured[md]"`

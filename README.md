@@ -11,7 +11,7 @@
 * so that → when we search through all of this data, each chunk is gonna be more focused & more relevant to what we-re looking for ('RecursiveCharacterTextSplitter')
 * to be able to query each chunk → need to turn this into a db → chromadb → as it uses vector embeddings as the key
 
-[embeddings 101](https://youtu.be/QdDoFfkVkcw?si=hY-VQVtDCF_1fcg3)
+[rabbit hole syndrome: embeddings 101](https://youtu.be/QdDoFfkVkcw?si=hY-VQVtDCF_1fcg3)
 
 ![1747595604028](image/README/1747595604028.png)
 * texts with similar meaning will be plotted together on the chart, & dis-similar → far apart
@@ -27,3 +27,28 @@
 * [Tokenization Algo. used for BERT (by google): **WordPiece Encoding**](https://huggingface.co/learn/llm-course/en/chapter6/6?fw=pt)
 
 [MTEB: massive text embedding benchmark](https://huggingface.co/papers/2210.07316)
+
+## Query for Relevant data
+![1747595858652](image/README/1747595858652.png)
+
+* Objective → to find the chunks in the db, that'll most likely contain the answer to the question that we wanna ask
+* How → using the db created earlier, and the same embedding function (that was used to create that db)
+
+* Goal → 
+  * take a query
+  * turn that into an embedding (using the same func.)
+  * & then scan through the db, & find maybe 5 chunks of info. that are closest in embedding distance from our query
+  * those chunks are then used to craft a more custom response, that's still based on our source info.
+
+## Create Response
+* calling an LLM to generate the response based on the context
+
+## Other References:
+* [pixegami: video project ref.](https://www.youtube.com/watch?v=tcqEUSNCn8I)
+* [pixegami: repo](https://github.com/pixegami/langchain-rag-tutorial/tree/main)
+* [aws lambda dev guide](https://github.com/awsdocs/aws-lambda-developer-guide)
+* [rabbit hole syndrome: repo](https://github.com/rabbit-hole-syndrome/open-source-embeddings)
+* [ai jason: HF + LC](https://youtu.be/_j7JEDWuqLE?si=nfy7bb52VfbkMdQL)
+* [SBERT](https://sbert.net/)
+* [LangChain](https://python.langchain.com/docs/tutorials/retrievers/)
+* [ChromaDB](https://docs.trychroma.com/docs/overview/getting-started)
