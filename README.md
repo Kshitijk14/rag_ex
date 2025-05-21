@@ -52,3 +52,8 @@
 * [SBERT](https://sbert.net/)
 * [LangChain](https://python.langchain.com/docs/tutorials/retrievers/)
 * [ChromaDB](https://docs.trychroma.com/docs/overview/getting-started)
+* Models Used:
+  * [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+  * [intfloat/e5-small-v20](https://arxiv.org/pdf/2212.03533)
+  * [intfloat/multilingual-e5-large-instruct](https://arxiv.org/pdf/2402.05672)
+  * [Qwen3](https://arxiv.org/abs/2505.09388)
