@@ -17,6 +17,7 @@ sentence-transformers
 pyyaml
 psutil
 hf_xet
+streamlit
 
 # `pip install -U langchain-chroma`
 # `pip install "unstructured[md]"`

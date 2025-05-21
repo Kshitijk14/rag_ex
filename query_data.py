@@ -73,20 +73,45 @@ def setup_logger(name, log_file):
 def load_local_model(model_name=GENERATION_MODEL_NAME):
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True)
+    
+    # Disable sliding window attention if it's on by default
+    if hasattr(model.config, "use_sliding_window"):
+        model.config.use_sliding_window = False
+    
+    # Set pad_token_id if not defined
+    if model.config.pad_token_id is None:
+        model.config.pad_token_id = model.config.eos_token_id
+    
     model.eval()
     return tokenizer, model
 
-def generate_response(prompt, tokenizer, model, max_tokens=512):
-    input_ids = tokenizer(prompt, return_tensors="pt").input_ids
-    with torch.no_grad():
-        outputs = model.generate(
-            input_ids,
-            max_new_tokens=max_tokens,
-            do_sample=True,
-            temperature=0.7,
-            top_p=0.9,
-            eos_token_id=tokenizer.eos_token_id
-        )    
+# def generate_response(prompt, tokenizer, model, max_tokens=512):
+#     input_ids = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024).input_ids
+#     with torch.no_grad():
+#         outputs = model.generate(
+#             input_ids,
+#             max_new_tokens=max_tokens,
+#             do_sample=True,
+#             temperature=0.7,
+#             top_p=0.9,
+#             eos_token_id=tokenizer.eos_token_id
+#         )    
+#     return tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+def generate_response(prompt, tokenizer, model):
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
+
+    outputs = model.generate(
+        input_ids=inputs["input_ids"],
+        attention_mask=inputs.get("attention_mask"),
+        pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id,
+        max_new_tokens=512,
+        temperature=0.7,
+        do_sample=True,
+        top_p=0.9,
+        repetition_penalty=1.1,
+    )
+    
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # === Guardrail: Validate if answer is supported by context ===
